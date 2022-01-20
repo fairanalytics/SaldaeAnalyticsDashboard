@@ -16,6 +16,7 @@ app_ui <- function(request) {
     shiny.info::powered_by("Fair Analytics", link = "https://www.fairanalytics.net/", position = "bottom right"),
     shinyalert::useShinyalert(),
     golem_add_external_resources(),
+    shinybusy::use_busy_bar(color = "lightblue", centered = TRUE, height = "12px"),
     bs4Dash::dashboardPage(
       preloader = list(html = tagList(waiter::spin_circle_square(), "Loading ..."), color = "darkcyan"),
       bs4Dash::dashboardHeader(title =  tags$a(href = 'https://www.fairanalytics.net/'),
