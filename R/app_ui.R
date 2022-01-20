@@ -17,17 +17,22 @@ app_ui <- function(request) {
     shinyalert::useShinyalert(),
     golem_add_external_resources(),
     bs4Dash::dashboardPage(
-      preloader = list(html = tagList(waiter::spin_1(), "Loading ..."), color = "darkcyan"),
-      bs4Dash::dashboardHeader(title =  tags$a(href = 'https://www.fairanalytics.net/',  tags$img(src = '/www/saldae_log2.png')),
+      preloader = list(html = tagList(waiter::spin_circle_square(), "Loading ..."), color = "darkcyan"),
+      bs4Dash::dashboardHeader(title =  tags$a(href = 'https://www.fairanalytics.net/'),
                                titleWidth = "50%"),# header
       controlbar = bs4Dash::dashboardControlbar(
         collapsed = TRUE,
         div(class = "p-3", bs4Dash::skinSelector()),
-        pinned = TRUE
+        pinned = FALSE
       ),
-      fullscreen = FALSE,
+      fullscreen = TRUE,
+      # help = TRUE,
       bs4Dash::dashboardSidebar(
-                                bs4Dash::sidebarMenu(
+        bs4Dash::bs4SidebarUserPanel(
+          image = "/www/favicon.ico",
+          name = "Saldae Analytics"
+        ),                        
+        bs4Dash::sidebarMenu(
                                   bs4Dash::menuItem("Data View", tabName = "data_upload", icon = icon("table")),
                                          
                                          bs4Dash::menuItem("Explore & Prepare", icon = icon("check-circle"), startExpanded = FALSE,
@@ -42,7 +47,7 @@ app_ui <- function(request) {
                                          
                                   bs4Dash::menuItem("AI & Analytics", icon = icon("chart-line"), startExpanded = FALSE,
                                                                   bs4Dash::menuSubItem("Causality", tabName = "causal_impact"),
-                                                                  bs4Dash::menuSubItem("Forecasting", icon = icon("chart-bar"), tabName = "advanced_analytics")
+                                                                  bs4Dash::menuSubItem("Forecasting", icon = icon("fas fa-chart-bar"), tabName = "advanced_analytics")
                                                                   # bs4Dash::menuSubItem("Scenario Simulation", tabName = "simulation_engine")
                                          ),
                                   bs4Dash::menuItem("Reporting/Dashboard", icon = icon("file-signature"), startExpanded = FALSE,
@@ -58,9 +63,10 @@ app_ui <- function(request) {
                                          
                                          
                                          #- tagara sidebarMenu
-                                       )
-                                       #- tagara dashboardSidebar
                                        ),
+        collapsed = TRUE                        
+               #- tagara dashboardSidebar
+                                ),
       bs4Dash::dashboardBody(
         
         
@@ -148,6 +154,7 @@ app_ui <- function(request) {
 #' @import shiny
 #' @importFrom golem add_resource_path activate_js favicon bundle_resources
 #' @noRd
+#' @export
 golem_add_external_resources <- function(){
   
   add_resource_path(
