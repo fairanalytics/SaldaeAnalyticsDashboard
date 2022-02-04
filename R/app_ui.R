@@ -16,7 +16,7 @@ app_ui <- function(request) {
     shiny.info::powered_by("Fair Analytics", link = "https://www.fairanalytics.net/", position = "bottom right"),
     shinyalert::useShinyalert(),
     golem_add_external_resources(),
-    shinybusy::use_busy_bar(color = "lightblue", centered = TRUE, height = "12px"),
+    shinybusy::add_busy_bar(color = "#C4D517"),
     bs4Dash::dashboardPage(
       preloader = list(html = tagList(waiter::spin_circle_square(), "Loading ..."), color = "darkcyan"),
       bs4Dash::dashboardHeader(title =  tags$a(href = 'https://www.fairanalytics.net/'),
@@ -82,7 +82,7 @@ app_ui <- function(request) {
                                   
           ),
           bs4Dash::tabItem("data_exploration", 
-                                  SaldaeModulesUI::SA_Value_box_UI("SA_valuebox"),
+                                  # SaldaeModulesUI::SA_Value_box_UI("SA_valuebox"),
                                   SaldaeModulesUI::SA_key_figures_UI("SA_key_figures"),
                                   
                                   SaldaeModulesUI::SA_tisefka_UI("SA_module_tisefka",mod_title= "Saldae Module")
@@ -132,12 +132,12 @@ app_ui <- function(request) {
           
           bs4Dash::tabItem("saldae_report",
                                   SaldaeModulesUI::SA_reporting_UI("Saldae_reporting")
-          )
+          ),
           ## Saldae Data
 
-          # bs4Dash::tabItem("SA_data_provider",
-          #                         SA_EuroStat_UI("SA_eurostat_test")
-          # )
+          bs4Dash::tabItem("SA_data_provider",
+                                  # SA_EuroStat_UI("SA_eurostat_test")
+          )
         #- tagara menu item
         )
         
