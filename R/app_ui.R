@@ -15,7 +15,7 @@ app_ui <- function(request) {
   tagList(
     shiny.info::powered_by("Fair Analytics", link = "https://www.fairanalytics.net/", position = "bottom right"),
     shinyalert::useShinyalert(),
-    golem_add_external_resources(),
+    # golem_add_external_resources(),
     shinybusy::add_busy_bar(color = "#C4D517"),
     bs4Dash::dashboardPage(
       preloader = list(html = tagList(waiter::spin_circle_square(), "Loading ..."), color = "darkcyan"),
@@ -99,8 +99,8 @@ app_ui <- function(request) {
           
           bs4Dash::tabItem("business_charts",
                                   fluidRow(
-                                    col_6(SaldaeModulesUI::Saldae_taftilt_UI("SA_taftilt_test",mod_title= "Saldae CandleStick Module")),
-                                    col_6(SaldaeModulesUI::Saldae_amadal_UI("SA_amadal_test",mod_title= "Saldae Map Module"))
+                                    column(width = 6, SaldaeModulesUI::Saldae_taftilt_UI("SA_taftilt_test",mod_title= "Saldae CandleStick Module")),
+                                    column(width = 6, SaldaeModulesUI::Saldae_amadal_UI("SA_amadal_test",mod_title= "Saldae Map Module"))
                                   ),
                                   SaldaeModulesUI::Saldae_kefrida_UI("SA_kefrida_test",mod_title= "Saldae Waterfall Module")
                                   

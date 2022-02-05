@@ -4,6 +4,7 @@
 #'     point to inside the current package.
 #' 
 #' @noRd
+#' @export
 app_sys <- function(...){
   system.file(..., package = "SaldaeAnalyticsDashboard")
 }
